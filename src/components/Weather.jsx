@@ -8,10 +8,21 @@ import snow_icon from "../assets/snow.png";
 import wind_icon from "../assets/wind.png";
 import humidity_icon from "../assets/humidity.png";
 import { useEffect, useRef, useState } from "react";
-import { Modal, Button } from 'react-bootstrap';
-
+import { Modal, Button } from "react-bootstrap";
 
 const Weather = () => {
+
+  const [loading, setLoading] = useState(false); // To track loading state of loader
+
+  //Loader Spinner
+  const Loader = () => {
+    return (
+      <div className="loader">
+        <div className="spinner"></div>
+      </div>
+    );
+  };
+
   const inputRef = useRef();
 
   const [weatherData, setWeatherData] = useState(false);
@@ -23,6 +34,12 @@ const Weather = () => {
   const showModalMessage = (message) => {
     setModalMessage(message); // Set the message to show in the modal
     setShowModal(true); // Show the modal
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      search(inputRef.current.value); // Trigger search when Enter is pressed
+    }
   };
 
   const allIcons = {
@@ -47,6 +64,9 @@ const Weather = () => {
       showModalMessage("Please enter the city name."); // Show modal for empty city name
       return;
     }
+
+    setLoading(true);
+
     try {
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${
         import.meta.env.VITE_APP_ID
@@ -57,6 +77,7 @@ const Weather = () => {
 
       if (!response.ok) {
         showModalMessage("Please enter the correct city name."); // Show modal for invalid city name
+        setLoading(false); // Stop loading when the response is invalid
         return;
       }
 
@@ -69,21 +90,28 @@ const Weather = () => {
         location: data.name,
         icon: icon,
       });
+      setLoading(false); // Stop loading when the data is fetched successfully
     } catch (error) {
       setWeatherData(false);
       console.error("Error in fetching weather data");
+      setLoading(false); // Stop loading in case of error
     }
   };
 
   useEffect(() => {
-    console.log("Fetching Weather for london....")
-    search("London");
+    console.log("Fetching Weather for london....");
+    search("Pune");
   }, []);
 
   return (
     <div className="weather">
       <div className="search-bar">
-        <input ref={inputRef} type="text" placeholder="Search" />
+        <input
+          ref={inputRef}
+          type="text"
+          placeholder="Search"
+          onKeyDown={handleKeyDown}
+        />
         <img
           src={search_icon}
           alt=""
@@ -91,7 +119,9 @@ const Weather = () => {
         />
       </div>
 
-      {weatherData ? (
+      {loading ? (
+        <Loader /> // Show loader while fetching data
+      ) : weatherData ? (
         <>
           <img src={weatherData.icon} alt="" className="weather-icon" />
           <p className="temperature">{weatherData.temperature}*C</p>

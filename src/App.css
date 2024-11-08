@@ -1,0 +1,10 @@
+/* App.css or your global CSS file */
+.app {
+    background-image: url('src/assets/weather_bg.jpg'); /* Replace with your image path */
+    background-size: cover; /* Ensures the image covers the whole page */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    height: 100vh; /* Ensure it covers the full viewport */
+    margin: 0;  /* Remove default margins */
+  }
+  

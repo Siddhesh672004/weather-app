@@ -1,12 +1,34 @@
 .weather{
+    position: relative;
     place-self: center;
     padding: 40px;
     border-radius: 10px;
-    background-image: linear-gradient(45deg, #2f4680, #500ae4);
+    background: rgba( 0, 0, 0, 0.4); /* Transparent white background */
+    backdrop-filter: blur(5px); /* Apply blur effect to the background */
+    border: 2px solid white; /* White border */
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 90%;
+    max-width: 400px;
 }
+
+.weather::before {
+    content: ''; /* Empty content for the pseudo-element */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('src/assets/weather_bg.jpg'); /* Background image for the blurred effect */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.4; /* Set opacity to control image visibility */
+    z-index: -1; /* Make sure the background is behind the content */
+    filter: blur(10px); /* Apply blur effect to the background */
+  }
+  
 
 .search-bar{
     display: flex;
@@ -75,61 +97,85 @@
     width: 26px;
     margin-top: 10px;
 }
-
 /* Modal Styles */
 .modal-content {
-  border-radius: 10px;
-  color: white;
-}
+    border-radius: 10px;
+    color: white;
+  }
+  
+  .modal-header {
+    border-bottom: 1px solid #fff;
+    padding: 20px;
+  }
+  
+  .modal-title {
+    font-size: 24px;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .modal-body {
+    padding: 20px;
+    font-size: 18px;
+    text-align: center;
+  }
+  
+  .modal-footer {
+    background: transparent;
+    border-top: 1px solid #fff;
+    padding: 10px;
+    justify-content: center;
+  }
+  
+  button {
+    border-radius: 40px;
+    background-color: #500ae4;
+    color: white;
+    font-size: 16px;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #2f4680;
+  }
+  
+  /* Fix for modal positioning */
+  .modal-dialog {
+    max-width: 500px;
+    margin: 10% auto; /* Centers the modal vertically and horizontally */
+  }
+  
+  .modal-content {
+    background-color: #333; /* Optional: To match the dark background */
+  }
+  
+  .modal-header, .modal-body, .modal-footer {
+    background-color: transparent; /* Optional: To avoid background interference */
+  }
+  
 
-.modal-header {
-  border-bottom: 1px solid #fff;
-  padding: 20px;
-}
+  /* Loader CSS */
 
-.modal-title {
-  font-size: 24px;
-  color: white;
-  font-weight: bold;
-}
-
-.modal-body {
-  padding: 20px;
-  font-size: 18px;
-  text-align: center;
-}
-
-.modal-footer {
-  background: transparent;
-  border-top: 1px solid #fff;
-  padding: 10px;
-  justify-content: center;
-}
-
-button {
-  border-radius: 40px;
-  background-color: #500ae4;
-  color: white;
-  font-size: 16px;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #2f4680;
-}
-
-/* Close button styling */
-.close {
-  color: white;
-  font-size: 24px;
-  opacity: 1;
-}
-
-.close:hover,
-.close:focus {
-  color: #500ae4;
-  text-decoration: none;
-  cursor: pointer;
-}
+  .loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+  }
+  
+  .spinner {
+    border: 4px solid #f3f3f3; /* Light gray */
+    border-top: 4px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+ /* Loader Css end*/  
