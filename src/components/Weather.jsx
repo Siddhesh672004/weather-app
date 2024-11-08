@@ -59,6 +59,7 @@ const Weather = () => {
     "13n": snow_icon,
   };
 
+
   const search = async (city) => {
     if (city === "") {
       showModalMessage("Please enter the city name."); // Show modal for empty city name
