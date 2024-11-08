@@ -74,15 +74,16 @@ const Weather = () => {
       }`;
 
       const response = await fetch(url);
-      const data = await response.json();
+      
 
       if (!response.ok) {
         showModalMessage("Please enter the correct city name."); // Show modal for invalid city name
         setLoading(false); // Stop loading when the response is invalid
         return;
       }
-
+      const data = await response.json();
       console.log(data);
+
       const icon = allIcons[data.weather[0].icon] || clear_icon;
       setWeatherData({
         humidity: data.main.humidity,
@@ -96,6 +97,7 @@ const Weather = () => {
       setWeatherData(false);
       console.error("Error in fetching weather data");
       setLoading(false); // Stop loading in case of error
+      showModalMessage("An error occurred while fetching weather data."); 
     }
   };
 
