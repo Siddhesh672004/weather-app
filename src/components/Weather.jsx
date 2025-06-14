@@ -58,7 +58,8 @@ const Weather = () => {
     "13d": snow_icon,
     "13n": snow_icon,
   };
-
+  
+  const Key1=import.meta.env.VITE_APP_ID;
 
   const search = async (city) => {
     if (city === "") {
@@ -70,7 +71,7 @@ const Weather = () => {
 
     try {
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${
-        import.meta.env.VITE_APP_ID
+        Key1
       }`;
 
       const response = await fetch(url);
