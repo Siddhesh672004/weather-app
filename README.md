@@ -50,7 +50,7 @@ weather-app/
 ```
 
 ## 🖼️ Screenshot
-![App Screenshot](./assets/Weather_App.png)
+![App Screenshot](./src/assets/weather.png)
 
 ## 🚀 Setup Instructions
 
